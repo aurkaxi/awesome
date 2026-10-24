@@ -16,3 +16,6 @@
 [submodule "module/tyrannical"]
 	path = module/tyrannical
 	url = git@github.com:Elv13/tyrannical.git
+[submodule "module/machina"]
+	path = module/machina
+	url = git@github.com:basaran/awesomewm-machina

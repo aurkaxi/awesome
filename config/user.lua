@@ -43,8 +43,8 @@ return {
         weather = {
             key = "",
             coordinates = {
-                "REDACTED",
-                "REDACTED",
+                "",
+                "",
             }
         },
         github = {
