@@ -7,7 +7,6 @@ local apps = require 'config.apps'
 local mod = require 'bindings.mod'
 
 local machi = require 'module.layout-machi'
-local xrandr = require("module.xrandr")
 require('module.exit-screen')
 menubar.utils.terminal = apps.terminal
 
@@ -488,14 +487,13 @@ awful.keyboard.append_global_keybindings {
     },
 }
 
--- test
+-- Display
 awful.keyboard.append_global_keybindings {
     awful.key {
         modifiers   = { mod.super },
         key         = '`',
-        description = 'test',
-        group       = 'test',
-        on_press    = function() awful.titlebar.toggle(client.focus) end,
-        -- on_press    = function()  xrandr.xrandr() end,
+        description = "auto-detect and apply display layout",
+        group       = 'awesome',
+        on_press    = function() awful.spawn("autorandr --change") end,
     },
 }
