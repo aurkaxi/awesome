@@ -8,6 +8,7 @@ local mod = require 'bindings.mod'
 
 local machi = require 'module.layout-machi'
 require('module.exit-screen')
+local term_scratch = require('module.scratchpad')
 menubar.utils.terminal = apps.terminal
 
 -- general awesome keys
@@ -40,15 +41,8 @@ awful.keyboard.append_global_keybindings {
         key         = 'Return',
         description = 'Open ScratchPad',
         group       = 'launcher',
-        on_press    = function() awesome.emit_signal("scratchpad::toggle") end,
+        on_press    = function() term_scratch:toggle() end,
     },
-    -- awful.key{
-    --     modifiers   = { },
-    --     key         = 'XF86Launch1',
-    --     description = 'Open ScratchPad',
-    --     group       = 'launcher',
-    --     on_press    = function() awesome.emit_signal("scratchpad::toggle") end,
-    -- },
     awful.key {
         modifiers   = { mod.super, mod.shift },
         key         = 'Return',
