@@ -7,7 +7,7 @@ local dpi = xresources.apply_dpi
 local naughty = require("naughty")
 local helpers = require("helpers")
 local menubar = require("menubar")
-local animation = require("module.animation")
+local rubato = require('rubato')
 --- Naughty Notifications with animation
 --- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -308,12 +308,12 @@ naughty.connect_signal("request::display", function(n)
     helpers.ui.add_hover_cursor(dismiss, "hand2")
 
 
-    local anim = animation:new({
+    local anim = rubato.timed({
         duration = n.timeout,
-        target = 100,
-        easing = animation.easing.linear,
-        reset_on_stop = false,
-        update = function(self, pos)
+        rate = 60,
+        easing = rubato.easing.linear,
+        pos = 0,
+        subscribed = function(pos)
             timeout_arc.value = pos
         end,
     })
@@ -325,11 +325,11 @@ naughty.connect_signal("request::display", function(n)
     widget:connect_signal("mouse::enter", function()
         --- Absurdly big number because setting it to 0 doesn't work
         n:set_timeout(4294967)
-        anim:stop()
+        anim.target = anim.pos
     end)
 
     widget:connect_signal("mouse::leave", function()
-        anim:start()
+        anim.target = 100
     end)
 
     local notification_height = widget.height + beautiful.notification_spacing
@@ -339,7 +339,7 @@ naughty.connect_signal("request::display", function(n)
         get_oldest_notification():destroy(naughty.notification_closed_reason.too_many_on_screen)
     end
 
-    anim:start()
+    anim.target = 100
 
     --- Destroy popups notifs if dont_disturb mode is on
     if _G.dnd_state then
