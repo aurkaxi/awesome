@@ -20,10 +20,10 @@ require 'bindings'
 
 -- load rules
 require 'config.rules'
-
 -- load signals
 require 'signals'
 
+require('config.tyrannical')
 -- ui
 require 'module'
 require 'ui.wibar'

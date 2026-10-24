@@ -13,3 +13,6 @@
 [submodule "module/layout-machi"]
 	path = module/layout-machi
 	url = https://github.com/xinhaoyuan/layout-machi
+[submodule "module/tyrannical"]
+	path = module/tyrannical
+	url = git@github.com:Elv13/tyrannical.git

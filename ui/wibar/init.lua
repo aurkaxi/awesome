@@ -78,9 +78,9 @@ local keyboard_icon = create_icon('󰌌 ', beautiful.xcolor4)
 -- Assign layouts to tags
 -- awful.tag({ "", "", "", "", "", "" }, s, allLayouts)
 -- awful.tag(vars.tags, s, awful.layout.layouts)
-for s in screen do
-    s.tag = awful.tag(vars.tags, s, vars.layouts)
-end
+-- for s in screen do
+--     s.tag = awful.tag(vars.tags, s, vars.layouts)
+-- end
 -- LAIN TESTS
 
 
