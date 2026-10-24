@@ -66,15 +66,6 @@ tyrannical.properties.intrusive                   = {
     "kcolorchooser", "plasmoidviewer", "Xephyr", "kruler", "plasmaengineexplorer",
 }
 
--- Ignore the tiled layout for the matching clients
-tyrannical.properties.floating                    = {
-    "MPlayer", "pinentry", "ksnapshot", "pinentry", "gtksu",
-    "xine", "feh", "kmix", "kcalc", "xcalc",
-    "yakuake", "Select Color$", "kruler", "kcolorchooser", "Paste Special",
-    "New Form", "Insert Picture", "kcharselect", "mythfrontend", "plasmoidviewer", "Arandr", 'Blueman-manager', 'Gpick',
-    'Kruler', 'Sxiv', 'Tor Browser', 'Wpa_gui', 'veromix', 'xtightvncviewer',
-}
-
 -- Make the matching clients (by classes) on top of the default layout
 tyrannical.properties.ontop                       = {
     "Xephyr", "ksnapshot", "kruler"
