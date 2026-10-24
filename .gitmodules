@@ -1,0 +1,15 @@
+[submodule "module/lain"]
+	path = module/lain
+	url = https://github.com/lcpz/lain
+[submodule "module/awesomewm-micky"]
+	path = module/awesomewm-micky
+	url = https://github.com/basaran/awesomewm-micky
+[submodule "module/bling"]
+	path = module/bling
+	url = https://github.com/BlingCorp/bling.git
+[submodule "module/rubato"]
+	path = module/rubato
+	url = git@github.com:andOrlando/rubato.git
+[submodule "module/layout-machi"]
+	path = module/layout-machi
+	url = https://github.com/xinhaoyuan/layout-machi

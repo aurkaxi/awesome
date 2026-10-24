@@ -1,0 +1,17 @@
+return {
+    clock = require(... .. ".clock"),
+    cpu = require(... .. ".cpu"),
+    date = require(... .. ".date"),
+    battery = require(... .. ".battery"),
+    keyboard = require(... .. ".keyboard"),
+    layoutbox = require(... .. ".layoutbox"),
+    mem = require(... .. ".mem"),
+    systray = require(... .. ".systray"),
+    audio = require(... .. ".pulseaudio"),
+    seperator = require(... .. ".seperator"),
+    taglist = require(... .. ".taglist"),
+    tasklist = require(... .. ".tasklist"),
+    mainmenu = require(... .. ".mainmenu"),
+    tomato = require(... .. ".tomato"),
+    net = require(... .. ".net-speed"),
+}
