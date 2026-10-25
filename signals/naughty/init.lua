@@ -49,6 +49,10 @@ naughty.connect_signal("request::action_icon", function(a, context, hints)
 end)
 
 naughty.connect_signal("request::display", function(n)
+    print("actions:", n.actions and #n.actions or "nil")
+    for _, a in ipairs(n.actions or {}) do
+        a:connect_signal("invoked", function() print("invoked:", a.name) end)
+    end
     --- random accent color
     local accent_colors = beautiful.xcolor2
 
@@ -307,30 +311,38 @@ naughty.connect_signal("request::display", function(n)
     --- Adds Close Cursor on Close Sign ---
     helpers.ui.add_hover_cursor(dismiss, "hand2")
 
-
-    local anim = rubato.timed({
-        duration = n.timeout,
-        rate = 60,
-        easing = rubato.easing.linear,
-        pos = 0,
-        subscribed = function(pos)
-            timeout_arc.value = pos
-        end,
-    })
-
-    anim:connect_signal("ended", function()
-        n:destroy()
+    local timeout = n.timout or 0
+    local closed = false
+    n:connect_signal("destroyed", function()
+        closed = true
     end)
 
-    widget:connect_signal("mouse::enter", function()
-        --- Absurdly big number because setting it to 0 doesn't work
-        n:set_timeout(4294967)
-        anim.target = anim.pos
-    end)
+    local anim
+    if timeout > 0 then
+        anim = rubato.timeds({
+            duration = timeout,
+            rate = 60,
+            easing = rubato.easing.linear,
+            pos = 0,
+            subscribed = function(pos)
+                timeout_arc.value = pos
+                if pos >= 99.9 and not closed then
+                    closed = true
+                    n:destroy(naughty.notification_closed_reason.expired)
+                end
+            end,
+        })
 
-    widget:connect_signal("mouse::leave", function()
-        anim.target = 100
-    end)
+        widget:connect_signal("mouse::enter", function()
+            n:set_timeout(4294967)
+            anim.target = anim.pos
+        end)
+
+        widget:connect_signal("mouse::leave", function()
+            anim.duration = math.max(0.1, timeout * (100 - anim.pos) / 100)
+            anim.target = 100
+        end)
+    end
 
     local notification_height = widget.height + beautiful.notification_spacing
     local total_notifications_height = #naughty.active * notification_height
@@ -339,7 +351,7 @@ naughty.connect_signal("request::display", function(n)
         get_oldest_notification():destroy(naughty.notification_closed_reason.too_many_on_screen)
     end
 
-    anim.target = 100
+    if anim then anim.target = 100 end
 
     --- Destroy popups notifs if dont_disturb mode is on
     if _G.dnd_state then
